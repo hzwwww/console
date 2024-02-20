@@ -17,8 +17,8 @@
  */
 module.exports = {
   // Banner
-  JOB_PL: '任务',
-  JOB_DESC: '任务（Job）用于运行短暂的一次性任务。任务会创建一个或多个容器组，并保证指定数量的容器组成功结束。',
+  JOB_PL: '分布式训练',
+  JOB_DESC: '分布式训练平台，支持Ray、PyTorch、Tensorflow、XGBoost、PaddlePaddle、MPI等框架',
   // List
   JOB_EMPTY_DESC: '请创建一个任务。',
   JOB_COMPLETED: '已完成',

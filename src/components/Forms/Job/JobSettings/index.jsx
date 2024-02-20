@@ -21,6 +21,7 @@ import { get } from 'lodash'
 import { Column, Columns, Form } from '@kube-design/components'
 import { NumberInput } from 'components/Inputs'
 import { MODULE_KIND_MAP } from 'utils/constants'
+import styles from './index.scss'
 
 export default class JobSettings extends React.Component {
   get prefix() {
@@ -37,41 +38,45 @@ export default class JobSettings extends React.Component {
 
     return (
       <Form data={this.formTemplate} ref={formRef}>
+        <div className={styles.header}>
+          <p>{t('Header节点配置')}</p>
+        </div>
         <Columns>
           <Column>
-            <Form.Item
-              label={t('MAXIMUM_RETRIES')}
-              desc={t('MAXIMUM_RETRIES_DESC')}
-            >
-              <NumberInput
-                min={0}
-                name={`${this.prefix}backoffLimit`}
-                integer
-              />
-            </Form.Item>
-            <Form.Item
-              label={t('PARALLEL_PODS')}
-              desc={t('PARALLEL_PODS_DESC')}
-            >
-              <NumberInput min={0} name={`${this.prefix}parallelism`} integer />
+            <Form.Item label={t('CPU（核数）')}>
+              <NumberInput />
             </Form.Item>
           </Column>
           <Column>
-            <Form.Item
-              label={t('COMPLETE_PODS')}
-              desc={t('COMPLETE_PODS_DESC')}
-            >
-              <NumberInput min={0} name={`${this.prefix}completions`} integer />
+            <Form.Item label={t('内存（GB）')}>
+              <NumberInput />
             </Form.Item>
-            <Form.Item
-              label={t('MAXIMUM_DURATION')}
-              desc={t('MAXIMUM_DURATION_DESC')}
-            >
-              <NumberInput
-                min={0}
-                name={`${this.prefix}activeDeadlineSeconds`}
-                integer
-              />
+          </Column>
+        </Columns>
+        <div className={styles.header}>
+          <p>{t('Worker节点配置')}</p>
+        </div>
+        <Columns>
+          <Column>
+            <Form.Item label={t('CPU（核数）')}>
+              <NumberInput />
+            </Form.Item>
+            <Form.Item label={t('内存（GB）')}>
+              <NumberInput />
+            </Form.Item>
+            <Form.Item label={t('GPU（卡数）')}>
+              <NumberInput />
+            </Form.Item>
+          </Column>
+          <Column>
+            <Form.Item label={t('实例数量')}>
+              <NumberInput />
+            </Form.Item>
+            <Form.Item label={t('实例最小数量（弹性）')}>
+              <NumberInput />
+            </Form.Item>
+            <Form.Item label={t('实例最小数量（弹性）')}>
+              <NumberInput />
             </Form.Item>
           </Column>
         </Columns>

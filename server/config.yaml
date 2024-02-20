@@ -28,8 +28,10 @@ server:
   apiServer:
     clientID: kubesphere
     clientSecret: kubesphere
-    url: http://ks-apiserver
-    wsUrl: ws://ks-apiserver
+    # url: http://ks-apiserver
+    # wsUrl: ws://ks-apiserver
+    url: http://192.168.12.100:31788
+    wsUrl: ws://192.168.12.100:31788
 
   # docker image search default url
   dockerHubUrl: https://hub.docker.com
@@ -365,6 +367,12 @@ client:
             icon: dashboard,
             authKey: "services",
           }
+        - {
+            name: jobs,
+            title: 机器学习平台,
+            icon: ai,
+            clusterModule: devops,
+        }
         - name: app-workloads
           title: APPLICATION_WORKLOAD_PL
           icon: appcenter
@@ -377,11 +385,11 @@ client:
                 - { name: deployments, title: DEPLOYMENT_PL }
                 - { name: statefulsets, title: STATEFULSET_PL }
                 - { name: daemonsets, title: DAEMONSET_PL }
-            - name: jobs
-              title: JOB_PL
-              tabs:
-                - { name: jobs, title: JOB_PL }
-                - { name: cronjobs, title: CRONJOB_PL }
+            # - name: jobs
+            #   title: JOB_PL
+            #   tabs:
+            #     - { name: jobs, title: JOB_PL }
+            #     - { name: cronjobs, title: CRONJOB_PL }
             - { name: ingresses, title: ROUTE_PL }
             - { name: pods, title: POD_PL }
         - name: storage

@@ -1,0 +1,14 @@
+@import '~scss/variables';
+@import '~scss/mixins';
+
+.header {
+  margin-bottom: 12px;
+  p:first-child {
+    height: 20px;
+    @include TypographyTitleH6;
+  }
+  p:last-child {
+    height: 20px;
+    @include TypographyParagraph($dark-color01);
+  }
+}

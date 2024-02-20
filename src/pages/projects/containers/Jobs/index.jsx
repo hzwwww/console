@@ -53,11 +53,19 @@ export default class Jobs extends React.Component {
       options: [
         {
           value: 'jobs',
-          label: t('JOB_PL'),
+          label: t('分布式训练'),
         },
         {
           value: 'cronjobs',
-          label: t('CRONJOB_PL'),
+          label: t('开发机'),
+        },
+        {
+          value: '1',
+          label: t('模型微调'),
+        },
+        {
+          value: '2',
+          label: t('模型部署'),
         },
       ],
     }

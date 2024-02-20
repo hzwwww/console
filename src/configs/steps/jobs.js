@@ -33,13 +33,13 @@ export default [
     required: true,
   },
   {
-    title: 'STRATEGY_SETTINGS',
+    title: 'Ray集群设置',
     icon: 'job',
     component: JobSettings,
     required: true,
   },
   {
-    title: 'POD_SETTINGS',
+    title: '镜像设置',
     icon: 'docker',
     component: ContainerSettings,
     required: true,

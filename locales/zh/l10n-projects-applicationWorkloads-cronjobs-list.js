@@ -18,7 +18,7 @@
 module.exports = {
   // Banner
   CRONJOBS: '定时任务',
-  CRONJOB_DESC: '定时任务（CronJob）管理基于时间的任务（Job），可用于运行周期性任务或重复性任务。',
+  CRONJOB_DESC: '在线开发、调试',
   // List
   CRONJOB_PAUSED: '已暂停',
   CRONJOB_RUNNING: '运行中',
@@ -58,6 +58,6 @@ module.exports = {
   // List > Edit YAML
   // List > Pause
   // List > Delete
-  CRONJOB_PL: '定时任务',
+  CRONJOB_PL: '开发机',
   CRONJOB_LOW: '定时任务'
 };

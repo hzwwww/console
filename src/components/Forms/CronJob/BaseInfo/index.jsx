@@ -150,7 +150,7 @@ export default class BaseInfo extends React.Component {
               </Form.Item>
             </Column>
           )}
-          <Column className="is-6">
+          {/* <Column className="is-6">
             <Form.Item
               label={t('SCHEDULE')}
               desc={t.html('CRONJOB_CRON_DESC')}
@@ -163,7 +163,7 @@ export default class BaseInfo extends React.Component {
                 placeholder=" "
               />
             </Form.Item>
-          </Column>
+          </Column> */}
           <Column className="is-6">
             <Form.Item label={t('DESCRIPTION')} desc={t('DESCRIPTION_DESC')}>
               <TextArea

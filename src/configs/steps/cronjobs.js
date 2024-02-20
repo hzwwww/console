@@ -19,7 +19,6 @@
 import { withProps } from 'utils'
 
 import BaseInfo from 'components/Forms/CronJob/BaseInfo'
-import JobSettings from 'components/Forms/Job/JobSettings'
 import ContainerSettings from 'components/Forms/Job/ContainerSettings'
 import VolumeSettings from 'components/Forms/Workload/VolumeSettings'
 import AdvanceSettings from 'components/Forms/Workload/AdvanceSettings'
@@ -31,14 +30,14 @@ export default [
     component: BaseInfo,
     required: true,
   },
+  // {
+  //   title: 'STRATEGY_SETTINGS',
+  //   icon: 'cron-job',
+  //   component: withProps(JobSettings, { prefix: 'spec.jobTemplate.spec.' }),
+  //   required: true,
+  // },
   {
-    title: 'STRATEGY_SETTINGS',
-    icon: 'cron-job',
-    component: withProps(JobSettings, { prefix: 'spec.jobTemplate.spec.' }),
-    required: true,
-  },
-  {
-    title: 'POD_SETTINGS',
+    title: '镜像配置',
     icon: 'docker',
     component: withProps(ContainerSettings, {
       prefix: 'spec.jobTemplate.spec.template.',
