@@ -21,6 +21,7 @@ import { getIndexRoute } from 'utils/router.config'
 import ListLayout from '../containers/Base/List'
 
 import Overview from '../containers/Overview'
+import TrainRay from '../containers/AIPlatform/TrainRay'
 import CRDApps from '../containers/Applications/CRDApps'
 import OPApps from '../containers/Applications/OPApps'
 import Deployments from '../containers/Deployments'
@@ -64,6 +65,11 @@ export default [
       {
         path: `${PATH}/overview`,
         component: Overview,
+        exact: true,
+      },
+      {
+        path: `${PATH}/ai-train-ray`,
+        component: TrainRay,
         exact: true,
       },
       {

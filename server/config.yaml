@@ -367,6 +367,11 @@ client:
             icon: dashboard,
             authKey: "services",
           }
+        - name: ai-platform
+          title: 机器学习平台
+          icon: ai
+          children:
+            - { name: ai-train-ray, title: 分布式训练-Ray }
         - name: app-workloads
           title: APPLICATION_WORKLOAD_PL
           icon: appcenter

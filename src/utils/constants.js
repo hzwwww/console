@@ -350,6 +350,7 @@ export const MODULE_KIND_MAP = {
   groups: 'Group',
   volumes: 'Volumes',
   hpas: 'HPA',
+  aiplatformtrainray: 'RayJob',
 }
 
 export const QUOTAS_MAP = {

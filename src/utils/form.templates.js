@@ -762,6 +762,28 @@ const getAccessorsTemplate = name => ({
   },
 })
 
+// const getRayJobTemplate = ({ name, namespace, entrypoint }) => ({
+//   kind: 'RayJob',
+//   apiVersion: 'ray.io/v1',
+//   metadata: {
+//     name,
+//     namespace,
+//   },
+//   spec: {
+//     entrypoint,
+//     shutdownAfterJobFinishes: false,
+//     runtimeEnvYAML: {
+//       pip: ['requests==2.26.0', 'pendulum==2.1.2'],
+//       env_vars: {
+//         counter_name: 'test_counter',
+//       },
+//     },
+//     rayClusterSpec: {
+//       rayVersion: '2.7.0',
+//     },
+//   },
+// })
+
 const FORM_TEMPLATES = {
   deployments: getDeploymentTemplate,
   deploymentsSchedule: getScheduleDeploymentTemplate,
@@ -808,6 +830,7 @@ const FORM_TEMPLATES = {
   notificationVerify: getNotificationVerifyTemplate,
   cds: getCDTemplate,
   codeRepos: getCodeRepoTemplate,
+  aiplatformtrainray: getSecretTemplate,
 }
 
 export default FORM_TEMPLATES
