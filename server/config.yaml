@@ -28,8 +28,10 @@ server:
   apiServer:
     clientID: kubesphere
     clientSecret: kubesphere
-    url: http://ks-apiserver
-    wsUrl: ws://ks-apiserver
+    # url: http://ks-apiserver
+    # wsUrl: ws://ks-apiserver
+    url: http://192.168.12.100:31788
+    wsUrl: ws://192.168.12.100:31788
 
   # docker image search default url
   dockerHubUrl: https://hub.docker.com
