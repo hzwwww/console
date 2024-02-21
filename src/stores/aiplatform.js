@@ -142,4 +142,15 @@ export default class AIPlatformStore {
   delete(params) {
     return this.submitting(request.delete(this.getDetailUrl(params)))
   }
+
+  @action
+  checkName(params, query) {
+    return request.get(
+      this.getDetailUrl(params),
+      { ...query },
+      {
+        headers: { 'x-check-exist': true },
+      }
+    )
+  }
 }

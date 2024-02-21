@@ -70,6 +70,7 @@ export default {
         formTemplate,
         steps: FORM_STEPS,
         modal: CreateModal,
+        supportGpuSelect: true,
         store,
         ...props,
       })

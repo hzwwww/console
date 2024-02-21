@@ -23,7 +23,7 @@ import Table from 'components/Tables/List'
 import { withProjectList } from 'components/HOCs/withList'
 import { getLocalTime, getDisplayName } from 'utils'
 import Banner from 'components/Cards/Banner'
-import AIPlatformStore from '../../../../../stores/aiplatform'
+import AIPlatformStore from 'stores/aiplatform'
 
 @withProjectList({
   store: new AIPlatformStore(),
@@ -48,7 +48,14 @@ export default class TrainRay extends React.Component {
     })
   }
 
-  showCreateRay = () => {}
+  showCreate = () => {
+    this.props.trigger('aiplatform.ray.create', {
+      module: this.props.module,
+      namespace: this.props.match.params.namespace,
+      cluster: this.props.match.params.cluster,
+      success: this.getData,
+    })
+  }
 
   get itemActions() {
     return [
@@ -56,6 +63,14 @@ export default class TrainRay extends React.Component {
         key: 'dashboard',
         icon: 'ip',
         text: '查看Ray Dashboard',
+        onClick: item => {
+          item || false
+        },
+      },
+      {
+        key: 'delete',
+        icon: 'trash',
+        text: '删除',
         onClick: item =>
           this.props.trigger('resource.delete', {
             type: 'CUSTOM_RESOURCE',
@@ -63,20 +78,16 @@ export default class TrainRay extends React.Component {
             success: this.getData,
           }),
       },
-      {
-        key: 'create',
-        icon: 'ip',
-        text: '创建',
-        onClick: () => {
-          this.props.trigger('aiplatform.ray.create', {
-            module: this.props.module,
-            namespace: this.props.match.params.namespace,
-            cluster: this.props.match.params.cluster,
-            success: this.getData,
-          })
-        },
-      },
     ]
+  }
+
+  get tableActions() {
+    const { tableProps } = this.props
+    return {
+      ...tableProps.tableActions,
+      onCreate: this.showCreate,
+      selectActions: [],
+    }
   }
 
   get columns() {
@@ -113,6 +124,7 @@ export default class TrainRay extends React.Component {
     const { data, name, page, total, limit, isLoading } = this.store.list
     const pagination = { page, total, limit }
     const filters = { name }
+    const { tableProps } = this.props
 
     return (
       <div>
@@ -124,13 +136,13 @@ export default class TrainRay extends React.Component {
           }
         />
         <Table
+          {...tableProps}
           data={toJS(data)}
           columns={this.columns}
           isLoading={isLoading}
           onFetch={this.getData}
-          onCreate={this.showCreateRay}
           itemActions={this.itemActions}
-          // enabledActions={this.enabledActions}
+          tableActions={this.tableActions}
           pagination={pagination}
           filters={filters}
           showEmpty={false}

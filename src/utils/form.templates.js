@@ -762,27 +762,107 @@ const getAccessorsTemplate = name => ({
   },
 })
 
-// const getRayJobTemplate = ({ name, namespace, entrypoint }) => ({
-//   kind: 'RayJob',
-//   apiVersion: 'ray.io/v1',
-//   metadata: {
-//     name,
-//     namespace,
-//   },
-//   spec: {
-//     entrypoint,
-//     shutdownAfterJobFinishes: false,
-//     runtimeEnvYAML: {
-//       pip: ['requests==2.26.0', 'pendulum==2.1.2'],
-//       env_vars: {
-//         counter_name: 'test_counter',
-//       },
-//     },
-//     rayClusterSpec: {
-//       rayVersion: '2.7.0',
-//     },
-//   },
-// })
+const getRayJobTemplate = ({ namespace }) => ({
+  kind: 'RayJob',
+  apiVersion: 'ray.io/v1',
+  metadata: {
+    namespace,
+  },
+  spec: {
+    entrypoint: '',
+    shutdownAfterJobFinishes: false,
+    runtimeEnvYAML: {
+      pip: ['requests==2.26.0', 'pendulum==2.1.2'],
+      env_vars: {
+        counter_name: 'test_counter',
+      },
+    },
+    rayClusterSpec: {
+      rayVersion: '2.7.0',
+      headGroupSpec: {
+        rayStartParams: {
+          'dashboard-host': '0.0.0.0',
+        },
+        template: {
+          spec: {
+            containers: [
+              {
+                name: 'ray-head',
+                image: 'rayproject/ray:2.7.0',
+                ports: [
+                  {
+                    containerPort: 6379,
+                    name: 'gcs-server',
+                  },
+                  {
+                    containerPort: 8265,
+                    name: 'dashboard',
+                  },
+                  {
+                    containerPort: 10001,
+                    name: 'client',
+                  },
+                ],
+                resources: {
+                  requests: {},
+                },
+                volumeMounts: [
+                  {
+                    mountPath: '/home/ray/samples',
+                    name: 'code-sample',
+                  },
+                ],
+              },
+            ],
+            volumes: [
+              {
+                name: 'code-sample',
+                configMap: {
+                  name: 'ray-job-code-sample',
+                  items: [
+                    {
+                      key: 'sample_code.py',
+                      path: 'sample_code.py',
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        },
+      },
+      workerGroupSpecs: [
+        {
+          replicas: 1,
+          minReplicas: 1,
+          maxReplicas: 5,
+          groupName: 'small-group',
+          rayStartParams: {},
+          template: {
+            spec: {
+              containers: [
+                {
+                  name: 'ray-worker',
+                  image: 'rayproject/ray:2.7.0',
+                  lifecycle: {
+                    preStop: {
+                      exec: {
+                        command: ['/bin/sh', '-c', 'ray stop'],
+                      },
+                    },
+                  },
+                  resources: {
+                    requests: {},
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  },
+})
 
 const FORM_TEMPLATES = {
   deployments: getDeploymentTemplate,
@@ -830,7 +910,7 @@ const FORM_TEMPLATES = {
   notificationVerify: getNotificationVerifyTemplate,
   cds: getCDTemplate,
   codeRepos: getCodeRepoTemplate,
-  aiplatformtrainray: getSecretTemplate,
+  aiplatformtrainray: getRayJobTemplate,
 }
 
 export default FORM_TEMPLATES

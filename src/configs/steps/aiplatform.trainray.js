@@ -16,8 +16,13 @@
  * along with KubeSphere Console.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import BaseInfo from 'components/Forms/AlertingPolicy/BaseInfo'
-import AlertingRules from 'components/Forms/AlertingPolicy/AlertingRules'
+import { withProps } from 'utils'
+
+import BaseInfo from 'components/Forms/AIPlatform/TrainRay/BaseInfo'
+import HeadSettings from 'components/Forms/AIPlatform/TrainRay/HeadSettings'
+import WorkerSettings from 'components/Forms/AIPlatform/TrainRay/WorkerSettings'
+import VolumeSettings from 'components/Forms/Workload/VolumeSettings'
+import AdvanceSettings from 'components/Forms/Workload/AdvanceSettings'
 
 export default [
   {
@@ -27,9 +32,33 @@ export default [
     icon: 'cdn',
   },
   {
-    title: 'ALERTING_RULE',
-    component: AlertingRules,
+    title: 'Head容器组设置',
+    icon: 'cluster',
+    component: withProps(HeadSettings, {
+      prefix: 'spec.rayClusterSpec.headGroupSpec.template.',
+    }),
     required: true,
-    icon: 'bell',
+  },
+  {
+    title: 'Worker容器组设置',
+    icon: 'cluster',
+    component: withProps(WorkerSettings, {
+      prefix: 'spec.rayClusterSpec.workerGroupSpecs[0].template.',
+    }),
+    required: true,
+  },
+  {
+    title: 'Head存储设置',
+    icon: 'storage',
+    component: withProps(VolumeSettings, {
+      prefix: 'spec.rayClusterSpec.headGroupSpec.template.',
+    }),
+    required: true,
+  },
+  {
+    title: 'ADVANCED_SETTINGS',
+    icon: 'slider',
+    component: AdvanceSettings,
+    required: true,
   },
 ]
