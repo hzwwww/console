@@ -95,6 +95,20 @@ export default class BaseInfo extends React.Component {
           </Columns>
           <Columns>
             <Column>
+              <Form.Item
+                label={t('启动命令')}
+                desc={t('启动Ray Python脚本的命令')}
+                rules={[
+                  {
+                    required: true,
+                    message: t('请输入Ray Python脚本启动命令'),
+                  },
+                ]}
+              >
+                <TextArea name="spec.entrypoint" maxLength={256} />
+              </Form.Item>
+            </Column>
+            <Column>
               <Form.Item label={t('DESCRIPTION')} desc={t('DESCRIPTION_DESC')}>
                 <TextArea
                   name="metadata.annotations['kubesphere.io/description']"

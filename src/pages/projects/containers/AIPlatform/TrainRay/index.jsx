@@ -64,7 +64,8 @@ export default class TrainRay extends React.Component {
         icon: 'ip',
         text: '查看Ray Dashboard',
         onClick: item => {
-          item || false
+          item &&
+            window.open('http://192.168.12.100:30265/#/overview', '_blank')
         },
       },
       {
@@ -108,14 +109,16 @@ export default class TrainRay extends React.Component {
         dataIndex: '_originData.status.jobStatus',
       },
       {
-        title: '启动时间',
-        dataIndex: '_originData.status.startTime',
-        render: time => getLocalTime(time).format('YYYY-MM-DD HH:mm:ss'),
+        title: '创建时间',
+        dataIndex: 'createTime',
+        render: time =>
+          time && getLocalTime(time).format('YYYY-MM-DD HH:mm:ss'),
       },
       {
         title: '结束时间',
         dataIndex: '_originData.status.endTime',
-        render: time => getLocalTime(time).format('YYYY-MM-DD HH:mm:ss'),
+        render: time =>
+          time && getLocalTime(time).format('YYYY-MM-DD HH:mm:ss'),
       },
     ]
   }

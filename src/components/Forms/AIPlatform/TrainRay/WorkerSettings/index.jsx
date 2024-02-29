@@ -42,9 +42,9 @@ export default class WorkerSettings extends Base {
       <div>
         <Form data={this.formTemplate} ref={formRef}>
           <Form.Item
-            label={t('容器组数量')}
+            label={t('Worker容器组数量')}
             desc={t('')}
-            rules={[{ required: true, message: t('请设置容器组数量') }]}
+            rules={[{ required: true, message: t('请设置Worker容器组数量') }]}
             className={styles.form}
           >
             <NumberInput name="spec.rayClusterSpec.workerGroupSpecs[0].replicas" />

@@ -153,4 +153,13 @@ export default class AIPlatformStore {
       }
     )
   }
+
+  @action
+  async create(data, params = {}) {
+    const res = await this.submitting(
+      request.post(this.getListUrl(params), data)
+    )
+
+    return res
+  }
 }

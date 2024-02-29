@@ -771,12 +771,8 @@ const getRayJobTemplate = ({ namespace }) => ({
   spec: {
     entrypoint: '',
     shutdownAfterJobFinishes: false,
-    runtimeEnvYAML: {
-      pip: ['requests==2.26.0', 'pendulum==2.1.2'],
-      env_vars: {
-        counter_name: 'test_counter',
-      },
-    },
+    runtimeEnvYAML:
+      'pip:\n  - requests==2.26.0\n  - pendulum==2.1.2\nenv_vars:\n  counter_name: "test_counter"\n',
     rayClusterSpec: {
       rayVersion: '2.7.0',
       headGroupSpec: {
@@ -810,6 +806,7 @@ const getRayJobTemplate = ({ namespace }) => ({
                   {
                     mountPath: '/home/ray/samples',
                     name: 'code-sample',
+                    readOnly: true,
                   },
                 ],
               },
